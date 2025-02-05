@@ -1,11 +1,7 @@
-# Use the official Nginx base image
 FROM nginx:latest
-
-# Copy the custom index.html file to the Nginx web root directory
-COPY index.html /usr/share/nginx/html/index.html
-
-# Expose port 80 for the web server
+# Copy the built files from the previous stage
+COPY build/ /usr/share/nginx/html
+# Expose port 80 (the default HTTP port)
 EXPOSE 80
-
-# Start Nginx when the container starts
+# Start Nginx and keep it running in the foreground
 CMD ["nginx", "-g", "daemon off;"]
